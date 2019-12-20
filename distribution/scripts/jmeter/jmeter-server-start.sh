@@ -103,7 +103,8 @@ if [[ -z $jmeter_heap_size ]]; then
     jmeter_heap_size="4g"
 fi
 
-export JVM_ARGS="-Xms$jmeter_heap_size -Xmx$jmeter_heap_size -XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:$gc_log_file $jmeter_flags"
+#export JVM_ARGS="-Xms$jmeter_heap_size -Xmx$jmeter_heap_size -XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:$gc_log_file $jmeter_flags"
+export JVM_ARGS="-Xms$jmeter_heap_size -Xmx$jmeter_heap_size -Xloggc:$gc_log_file -Xlog:gc*,safepoint,gc+heap=trace:file=$gc_log_file:uptime,utctime,level,tags $jmeter_flags"
 export RMI_HOST_DEF=-Djava.rmi.server.hostname=$jmeter_hostname
 
 echo "Starting JMeter Server with JVM_ARGS=$JVM_ARGS"

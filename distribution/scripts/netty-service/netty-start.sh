@@ -78,7 +78,7 @@ fi
 mkdir -p logs
 
 echo "Starting Netty"
-nohup java -Xms${heap_size} -Xmx${heap_size} -XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:$gc_log_file \
+nohup java -Xms${heap_size} -Xmx${heap_size} -Xlog:gc*,safepoint,gc+heap=trace:file=$gc_log_file:uptime,utctime,level,tags \
     -jar $service_name-${performance.common.version}.jar $netty_service_flags >netty.out 2>&1 &
 
 if [ "$wait_listen" = true ]; then
